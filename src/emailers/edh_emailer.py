@@ -3,7 +3,7 @@ from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 from config import EMAIL, PASSWORD, SMTP_SERVER, SMTP_PORT
 
-def send_email(cards_by_commander):
+def send_edhrec_email(cards_by_commander):
     msg = MIMEMultipart('alternative')
     msg['From'] = EMAIL
     msg['To'] = EMAIL

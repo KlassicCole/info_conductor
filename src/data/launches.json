@@ -1,0 +1,37 @@
+[
+    {
+        "mission": "Starlink (12-7)",
+        "vehicle": "Falcon 9",
+        "date": "January 27, 2025 08:22 PM UTC",
+        "location": "Cape Canaveral SFS",
+        "description": "A SpaceX Falcon 9 rocket will launch the Starlink (12-7) mission on Monday, January 27, 2025 at 8:22\u202fPM (UTC)."
+    },
+    {
+        "mission": "NVS-02 (IRNSS-1K)",
+        "vehicle": "GSLV-II",
+        "date": "January 29, 2025 12:53 AM UTC",
+        "location": "Satish Dhawan Space Centre",
+        "description": "An ISRO GSLV-II rocket will launch the NVS-02 (IRNSS-1K) mission on Wednesday, January 29, 2025 at 12:53\u202fAM (UTC)."
+    },
+    {
+        "mission": "SpainSat NG I",
+        "vehicle": "Falcon 9",
+        "date": "January 30, 2025 01:34 AM UTC",
+        "location": "Kennedy Space Center",
+        "description": "A SpaceX Falcon 9 rocket will launch the SpainSat NG I mission on Thursday, January 30, 2025 at 1:34\u202fAM (UTC)."
+    },
+    {
+        "mission": "Starlink (12-3)",
+        "vehicle": "Falcon 9",
+        "date": "January 30, 2025",
+        "location": "Cape Canaveral SFS",
+        "description": "A SpaceX Falcon 9 rocket will launch the Starlink (12-3) mission. The launch date is currently targeted for January 30, 2025 (UTC)."
+    },
+    {
+        "mission": "Eris Debut Flight",
+        "vehicle": "Eris",
+        "date": "January 2025",
+        "location": "Bowen Orbital Spaceport",
+        "description": "A Gilmour Space Eris rocket will launch the Eris Debut Flight mission. The launch date is currently targeted for January, 2025 (UTC)."
+    }
+]

@@ -1,35 +1,51 @@
-from scraper import scrape_commander_cards
-from tracker import filter_new_cards, save_data
-from emailer import send_email
+from data_sources.edhrec import scrape_commander_cards
+from data_sources.rocketlaunch import scrape_rocketlaunch
+# from emailers.edh_emailer import send_edhrec_email
+from emailers.rocketlaunch_emailer import send_rocketlaunch_email
+# from edh_tracker import filter_new_cards, save_data as save_edh_data, load_data as load_edh_data
+from data.rocketlaunch_tracker import filter_new_launches, save_launch_data, load_launch_data
 
-COMMANDER_URLS = {
-    'Atraxa, Praetors Voice': 'https://edhrec.com/commanders/atraxa-praetors-voice/planeswalkers',
-    'Gargos Vicious Watcher': 'https://edhrec.com/commanders/gargos-vicious-watcher',
-    'Krenko, Mob Boss': 'https://edhrec.com/commanders/krenko-mob-boss',
-    'Liberator Urzas Battlethopter': 'https://edhrec.com/commanders/liberator-urzas-battlethopter',
-    'Ghyrson Starn Kelermorph': 'https://edhrec.com/commanders/ghyrson-starn-kelermorph',
-    'Kenrith the Returned King': 'https://edhrec.com/commanders/kenrith-the-returned-king/group-hug',
-    'The First Sliver': 'https://edhrec.com/commanders/the-first-sliver'
-}
+def main():
+    while True:
+        print("\n--- Info Conductor Menu ---")
+        print("1. Scrape EDHREC")
+        print("2. Scrape RocketLaunch.Live")
+        print("3. Exit")
+
+        choice = input("Select an option: ")
+
+        if choice == "1":
+            edhrec_workflow()
+        elif choice == "2":
+            rocketlaunch_workflow()
+        elif choice == "3":
+            print("Exiting Info Conductor. Goodbye!")
+            break
+        else:
+            print("Invalid choice. Please try again.")
+
+def edhrec_workflow():
+    print("\nStarting EDHREC Workflow...")
+    saved_data = load_edh_data()
+    scraped_data = scrape_commander_cards()
+    new_data = filter_new_cards(scraped_data)
+    if new_data:
+        send_edhrec_email(new_data)
+        save_edh_data(new_data)
+    else:
+        print("No new EDHREC data to process.")
+
+def rocketlaunch_workflow():
+    print("\nStarting RocketLaunch.Live Workflow...")
+    saved_data = load_launch_data()
+    scraped_data = scrape_rocketlaunch()
+    new_data = filter_new_launches(scraped_data)
+    if new_data:
+        print("New rocket launches found. Sending email...")
+        send_rocketlaunch_email(new_data)
+        save_launch_data(new_data)
+    else:
+        print("No new rocket launches to process.")
 
 if __name__ == "__main__":
-    cards_by_commander = {}
-
-    # Step 1: Scrape each commander URL for new cards
-    for commander, url in COMMANDER_URLS.items():
-        print(f"Scraping for {commander}...")
-        cards = scrape_commander_cards(url)
-        if cards:
-            cards_by_commander[commander] = cards
-
-    # Step 2: Filter out duplicates for each commander
-    new_cards_by_commander = filter_new_cards(cards_by_commander)
-
-    # Step 3: Send email if new cards are found for any commander
-    if any(new_cards_by_commander.values()):
-        print("Sending email with new card recommendations...")
-    send_email(new_cards_by_commander)
-    save_data(new_cards_by_commander)
-else:
-    print("No new planeswalkers to recommend for any commander.")
-
+    main()
